@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="ru"> 
+<head> 
+    <meta charset="UTF-8" /> 
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /> 
+    <title>Антон Рясов | Маркетолог-аналитик & Бренд-стратег</title> 
+    <meta name="description" content="Лендинг-хаб Антона Рясова. Маркетолог-аналитик, бренд-стратег, креативный консультант. Портфолио, резюме, услуги и уникальные инструменты."> 
+    <meta name="author" content="Антон Рясов"> 
+    <meta name="theme-color" content="#030305" />
+
+    <!-- Иконки -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+    <!-- Шрифты -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;900&display=swap" rel="stylesheet" />
+
+    <!-- Библиотеки -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" defer></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js" defer></script>
+    <script src="https://cdn.jsdelivr.net/gh/studio-freight/lenis@1.0.42/bundled/lenis.min.js" defer></script>
+
+    <noscript>
+        <style>
+            .preloader { display: none; }
+            body { overflow: auto; }
+        </style>
+    </noscript>
+
+    <style>
+        :root {
+            /* 
+            ==============================================
+            == ГЛАВНЫЙ ПУЛЬТ УПРАВЛЕНИЯ ЦВЕТОМ ==
+            ==============================================
+            */
+
+            /* --- ОБЩИЕ ЦВЕТА СТРАНИЦЫ --- */
+            --bg-color: #030305;
+            --primary-accent: #8A2BE2; /* Фиолетовый для фона и градиента в заголовке */
+            --text-primary: #ECECF1;   /* Основной текст */
+            --text-secondary: #A0AEC0; /* Второстепенный текст */
+
+            /* --- БЕГУЩАЯ СТРОКА И БОКОВЫЕ СТРЕЛКИ --- */
+            --ticker-bg-color: #26ff52;
+            --ticker-bg-color-rgb: 38, 255, 82;
+
+            /* --- КАРТОЧКИ КОМПЕТЕНЦИЙ --- */
+            --card-icon-color: #26ff52; /* Цвет иконок */
+            --card-hover-border-color: #26ff52; /* Цвет обводки при наведении */
+            --card-hover-border-color-rgb: 38, 255, 82;
+            --card-hover-inner-glow-color-rgb: 30, 99, 247; /* Цвет внутреннего свечения при наведении */
+            
+            /* --- КНОПКИ ("Связаться", Контакты) --- */
+            --button-default-border-color: #26ff52; /* Цвет обводки по умолчанию */
+            --button-default-border-color-rgb: 38, 255, 82;
+            --button-hover-border-color: #1e63f7; /* Цвет обводки при наведении */
+            --button-hover-border-color-rgb: 30, 99, 247;
+            --button-hover-inner-glow-color-rgb: 0, 0, 0; /* Цвет внутреннего свечения при наведении */
+
+            /* --- Технические цвета --- */
+            --glass-bg: rgba(18, 18, 28, 0.5);
+            --border-color: rgba(255, 255, 255, 0.08);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        html { background-color: var(--bg-color); }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            color: var(--text-primary);
+            background-color: transparent;
+            line-height: 1.6;
+            overflow: hidden;
+            cursor: default;
+        }
+        
+        /* === Фон (аврора + шум) === */
+        .background-effects { position: fixed; inset: 0; z-index: -1; pointer-events: none; }
+        .aurora-background { position: absolute; inset: -5%; background: radial-gradient(30rem 25rem at 22% 26%, rgba(138, 43, 226, 0.7) 0%, transparent 60%), radial-gradient(16rem 16rem at 74% 35%, rgba(0, 242, 254, 0.8) 0%, transparent 60%), radial-gradient(18rem 18rem at 56% 82%, rgba(255, 0, 168, 0.7) 0%, transparent 60%), radial-gradient(90rem 70rem at 14% 18%, rgba(60, 22, 110, 0.26) 0%, transparent 60%); filter: blur(70px) contrast(1.08) saturate(1.05); animation: aurora-move 22s infinite alternate; }
+        @keyframes aurora-move { to { transform: scale(1.07) translateY(-1.5%); } }
+        .noise-overlay { position: absolute; inset: 0; background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAMAAAAp4XiDAAAAUVBMVEWFhYWDg4N3d3dtbW17e3t1dXVpaWlraeft7e3g4ODz8/Pj4+Pf39/6+vrx8fH29vb+/v7U1NTk5OTNzc3ExMTX19fS0tJKSkoAAADIyMh+f38AAABpL3zAAAACinRangeJloSfChJkSmVoKChJjEskGslsAnwKeJ5FfB5IcooOCgncfHh4kEskloKGhjeUvHjVOKXwIYOG0QhOAiBYRN5U2gRxVRJyrKShcrKIIKCDV23hkle//w/wJgGvpvpsCrwGzIAe5AnEAK5y7jyn1aP+92d//ALsZCEdVSgQAAAAASUVORK5CYII='); opacity: 0.03; }
+
+        /* === Прелоадер === */
+        .preloader { position: fixed; inset: 0; background: #000; z-index: 10000; display: flex; justify-content: center; align-items: center; }
+        .preloader-sphere { position: absolute; width: 250px; height: 250px; border-radius: 50%; filter: blur(40px); animation: pulse 4s infinite alternate ease-in-out; }
+        .preloader-sphere::after { content: ''; position: absolute; inset: -10px; border-radius: 50%; background: conic-gradient(from 0deg, var(--primary-accent), #FF00A8, #00F2FE, var(--primary-accent)); z-index: -1; }
+        @keyframes pulse { to { transform: scale(1.1) rotate(60deg); } }
+        .preloader-text { position: relative; z-index: 10; font-size: 1.2rem; font-weight: 500; color: var(--text-primary); }
+
+        /* === Общие компоненты === */
+        .container { max-width: 900px; margin: 0 auto; padding: 0 20px; }
+        .section { padding: 100px 0; }
+        .section-header { text-align: center; margin-bottom: 60px; }
+        .tagline { color: var(--primary-accent); font-weight: 600; margin-bottom: 12px; display: block; }
+        .section-title { font-size: clamp(2.8rem, 6vw, 5rem); font-weight: 900; line-height: 1.1; color: var(--text-primary); }
+        .highlight { background: linear-gradient(90deg, var(--primary-accent), #FF00A8); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .button { display: inline-flex; align-items: center; justify-content: center; gap: 10px; padding: 16px 28px; background: transparent; border-radius: 50px; color: var(--text-primary); text-decoration: none; font-weight: 600; position: relative; overflow: hidden; backdrop-filter: blur(10px); z-index: 1; border: 1px solid; }
+        a:hover { filter: brightness(1.08); }
+
+        /* === Унифицированный стиль кнопок === */
+        .glow-on-hover-dynamic-neon { border-color: var(--button-default-border-color); box-shadow: 0 0 10px rgba(var(--button-default-border-color-rgb), 0.7), 0 0 20px rgba(var(--button-default-border-color-rgb), 0.3); transition: color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease; }
+        .glow-on-hover-dynamic-neon::before { content: ''; position: absolute; top: 50%; left: 50%; width: 200%; padding-top: 200%; border-radius: 50%; background: radial-gradient(circle, rgba(var(--button-hover-inner-glow-color-rgb), 0.3) 0%, transparent 70%); transform: translate(-50%, -50%) scale(0); opacity: 0; transition: transform 0.6s ease, opacity 0.6s ease; z-index: -1; }
+        .glow-on-hover-dynamic-neon:hover { border-color: var(--button-hover-border-color); box-shadow: 0 0 15px rgba(var(--button-hover-border-color-rgb), 0.5), 0 0 30px rgba(var(--button-hover-border-color-rgb), 0.2); transform: translateY(-2px); }
+        .glow-on-hover-dynamic-neon:hover::before { transform: translate(-50%, -50%) scale(1); opacity: 1; }
+        
+        /* === Навигация === */
+        .navbar { position: fixed; top: 0; left: 0; width: 100%; padding: 25px 0; z-index: 1000; transition: transform 0.5s ease; background: linear-gradient(to bottom, rgba(3,3,5,0.65), transparent); backdrop-filter: blur(6px); }
+        .navbar.hidden { transform: translateY(-100%); }
+        .navbar .container { display: flex; justify-content: space-between; align-items: center; }
+        .nav-logo { font-size: 1.5rem; font-weight: 800; color: var(--text-primary); text-decoration: none; }
+        
+        /* === Hero === */
+        .hero-section { min-height: 90vh; display: flex; align-items: center; text-align: center; padding-top: 120px; padding-bottom: 50px; }
+        .hero-content .section-title { font-size: clamp(3.5rem, 9vw, 7rem); }
+        .hero-subtitle { font-size: clamp(1.1rem, 3vw, 1.4rem); color: var(--text-secondary); max-width: 800px; margin: 25px auto 40px; font-weight: 400; height: 1.6em; }
+        .hero-subtitle .cursor { display: inline-block; background-color: var(--secondary-accent); margin-left: 0.1rem; width: 3px; animation: blink 1s infinite; }
+        @keyframes blink { 50% { opacity: 0; } }
+        
+        /* === Бегущая строка === */
+        .ticker-container { padding: 80px 0; position: relative; }
+        .ticker-wrap { position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%) rotate(-2deg); width: 110%; padding: 1.2rem 0; background-color: var(--ticker-bg-color); box-shadow: 0 0 15px var(--ticker-bg-color), 0 0 30px rgba(var(--ticker-bg-color-rgb), 0.5); display: flex; overflow: hidden; }
+        .ticker { display: flex; flex-shrink: 0; white-space: nowrap; animation: scroll 40s linear infinite; }
+        .ticker-item { color: #030305; font-weight: 700; text-transform: uppercase; font-size: clamp(1rem, 3vw, 1.5rem); padding: 0 2rem; display: flex; align-items: center; gap: 2rem; }
+        .ticker-item i { font-size: 0.8em; opacity: 0.8; }
+        @keyframes scroll { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
+        /* === НОВЫЙ БЛОК CSS ДЛЯ ВТОРОЙ ЛЕНТЫ === */
+
+/* Общие стили для обеих лент, чтобы не дублировать код */
+.ticker-wrap, .ticker-wrap-reverse {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: 110%;
+    padding: 1.2rem 0;
+    background-color: var(--ticker-bg-color);
+    box-shadow: 0 0 15px var(--ticker-bg-color), 0 0 30px rgba(var(--ticker-bg-color-rgb), 0.5);
+    display: flex;
+    overflow: hidden;
+}
+
+/* Уникальный наклон для первой ленты (этот блок уже есть, просто убедись, что он выглядит так) */
+.ticker-wrap {
+    transform: translate(-50%, -50%) rotate(-2deg);
+}
+
+/* Уникальный наклон для второй ленты */
+.ticker-wrap-reverse {
+    transform: translate(-50%, -50%) rotate(2deg);
+}
+
+        /* === Вертикальный стек карточек === */
+        #portals { padding-top: 120px; }
+        .portal-stack { display: flex; flex-direction: column; align-items: center; gap: 25px; }
+        .portal-card { width: 100%; max-width: 700px; padding: 25px 30px; border: 1px solid var(--border-color); border-radius: 16px; position: relative; text-decoration: none; color: var(--text-primary); background: var(--glass-bg); overflow: hidden; transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease; }
+        .portal-card-content { display: flex; align-items: center; gap: 25px; position: relative; z-index: 2; }
+        
+        .portal-card > .inner-glow { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(var(--card-hover-inner-glow-color-rgb), 0.35); filter: blur(50px); transform: scale(0.8); opacity: 0; transition: opacity 0.5s ease, transform 0.5s ease; z-index: 1; }
+        .portal-card:hover > .inner-glow { opacity: 1; transform: scale(1); }
+        
+        .portal-card::before, .portal-card::after { font-family: 'Font Awesome 6 Free'; font-weight: 900; position: absolute; top: 50%; font-size: 1.5rem; color: var(--ticker-bg-color); text-shadow: 0 0 8px var(--ticker-bg-color), 0 0 16px rgba(var(--ticker-bg-color-rgb), 0.7); opacity: 0; transform: translateY(-50%) scale(0.5); transition: opacity 0.4s ease, transform 0.4s ease; z-index: 3; }
+        .portal-card::before { content: '\f060'; left: -50px; }
+        .portal-card::after { content: '\f061'; right: -50px; }
+        .portal-card:hover::before, .portal-card:hover::after { opacity: 1; transform: translateY(-50%) scale(1); }
+
+        .portal-card:hover { transform: translateY(-8px) scale(1.02); border-color: var(--card-hover-border-color); box-shadow: 0 0 20px rgba(var(--card-hover-border-color-rgb), 0.5), 0 0 40px rgba(var(--card-hover-border-color-rgb), 0.2); }
+        .portal-icon { font-size: 2.2rem; min-width: 40px; background: linear-gradient(135deg, var(--card-icon-color), #8cff7a); -webkit-background-clip: text; -webkit-text-fill-color: transparent; filter: drop-shadow(0 0 8px var(--card-icon-color)); transition: transform 0.4s ease; }
+        .portal-card-info { text-align: left; }
+        .portal-card-info h3 { font-size: 1.4rem; font-weight: 700; margin-bottom: 5px; }
+        .portal-card-info p { color: var(--text-secondary); font-size: 0.95rem; }
+
+        /* === Контакты и Футер === */
+        #contact .hero-cta-group { gap: 40px; }
+        #contact .hero-cta-group a { padding: 18px 35px; font-size: 1.1rem; }
+        .footer { padding: 40px 0; margin-top: 60px; border-top: 1px solid var(--border-color); }
+        .footer-links { display: flex; gap: 25px; }
+        .footer-links a { text-decoration: none; color: var(--text-secondary); transition: color 0.3s ease; }
+        .footer-links a:hover { color: var(--text-primary); }
+        
+        @media (max-width: 768px) {
+            .section { padding: 80px 0; }
+            .portal-card::before, .portal-card::after { display: none; }
+            .portal-card-content { flex-direction: column; text-align: center; gap: 15px; }
+            .portal-card-info { text-align: center; }
+            .footer { text-align: center; }
+            .footer .container { flex-direction: column; gap: 20px; }
+        }
+    </style>
+</head> 
+<body>
+    <div class="preloader" aria-hidden="true"><div style="position: relative; display: flex; justify-content: center; align-items: center;"><div class="preloader-sphere"></div><p class="preloader-text">Загрузка...</p></div></div>
+    <div class="background-effects" aria-hidden="true"><div class="aurora-background"></div><div class="noise-overlay"></div></div>
+
+    <header class="navbar" role="navigation">
+        <div class="container"><a href="#" class="nav-logo">AR</a><a href="#contact" class="button glow-on-hover-dynamic-neon">Связаться</a></div>
+    </header>
+
+    <div id="smooth-wrapper">
+        <div id="smooth-content">
+            <main>
+                <section class="hero-section"><div class="container"><div class="hero-content"><h1 class="section-title">👋Привет, я<br><span class="highlight">Антон Рясов</span></h1><p id="hero-subtitle" class="hero-subtitle"></p></div></div></section>
+                
+                <div class="ticker-container">
+                    <div class="ticker-wrap">
+                        <div class="ticker">
+                            <div class="ticker-item">BRANDING<i class="fa-solid fa-star-of-life"></i></div><div class="ticker-item">ANALYTICS<i class="fa-solid fa-star-of-life"></i></div><div class="ticker-item">CREATIVE<i class="fa-solid fa-star-of-life"></i></div><div class="ticker-item">DATA<i class="fa-solid fa-star-of-life"></i></div><div class="ticker-item">STRATEGY<i class="fa-solid fa-star-of-life"></i></div><div class="ticker-item">MARKETING<i class="fa-solid fa-star-of-life"></i></div><div class="ticker-item">EVENT<i class="fa-solid fa-star-of-life"></i></div><div class="ticker-item">DIGITAL<i class="fa-solid fa-star-of-life"></i></div>
+                            <div class="ticker-item">BRANDING<i class="fa-solid fa-star-of-life"></i></div><div class="ticker-item">ANALYTICS<i class="fa-solid fa-star-of-life"></i></div><div class="ticker-item">CREATIVE<i class="fa-solid fa-star-of-life"></i></div><div class="ticker-item">DATA<i class="fa-solid fa-star-of-life"></i></div><div class="ticker-item">STRATEGY<i class="fa-solid fa-star-of-life"></i></div><div class="ticker-item">MARKETING<i class="fa-solid fa-star-of-life"></i></div><div class="ticker-item">EVENT<i class="fa-solid fa-star-of-life"></i></div><div class="ticker-item">DIGITAL<i class="fa-solid fa-star-of-life"></i></div>
+                        </div>
+                    </div>
+                </div>
+
+                <section id="portals" class="section">
+                    <div class="container">
+                        <div class="section-header"><span class="tagline">Навигация</span><h2 class="section-title">Экосистема моих компетенций</h2></div>
+                        <div class="portal-stack">
+                            <a href="#your-resume-link" class="portal-card"><div class="inner-glow"></div><div class="portal-card-content"><span class="portal-icon"><i class="fa-solid fa-file-lines"></i></span><div class="portal-card-info"><h3>Резюме</h3><p>Мой профессиональный путь, ключевые навыки и достижения с удобным экспортом в PDF.</p></div></div></a>
+                            <a href="#your-portfolio-link" class="portal-card"><div class="inner-glow"></div><div class="portal-card-content"><span class="portal-icon"><i class="fa-solid fa-rocket"></i></span><div class="portal-card-info"><h3>Портфолио</h3><p>Кейсы, которые говорят громче слов. Взгляните на результаты.</p></div></div></a>
+                            <a href="#your-services-link" class="portal-card"><div class="inner-glow"></div><div class="portal-card-content"><span class="portal-icon"><i class="fa-solid fa-lightbulb"></i></span><div class="portal-card-info"><h3>Услуги</h3><p>Как я могу усилить ваш бизнес: от аналитики до креативных стратегий.</p></div></div></a>
+                            <a href="#your-guide-link" class="portal-card"><div class="inner-glow"></div><div class="portal-card-content"><span class="portal-icon"><i class="fa-solid fa-compass-drafting"></i></span><div class="portal-card-info"><h3>Гайд по позиционированию</h3><p>Мои авторские инсайты и методологии для создания сильного бренда.</p></div></div></a>
+                            <a href="#your-calculator-link" class="portal-card"><div class="inner-glow"></div><div class="portal-card-content"><span class="portal-icon"><i class="fa-solid fa-calculator"></i></span><div class="portal-card-info"><h3>Калькулятор аналитики</h3><p>Интерактивный инструмент для быстрой оценки юнит-экономики.</p></div></div></a>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- === ВТОРАЯ БЕГУЩАЯ СТРОКА (КОД ДЛЯ ВСТАВКИ) === -->
+<div class="ticker-container">
+    <div class="ticker-wrap ticker-wrap-reverse"> <!-- Обрати внимание на новый класс -->
+        <div class="ticker">
+            <div class="ticker-item">BRANDING<i class="fa-solid fa-star-of-life"></i></div><div class="ticker-item">ANALYTICS<i class="fa-solid fa-star-of-life"></i></div><div class="ticker-item">CREATIVE<i class="fa-solid fa-star-of-life"></i></div><div class="ticker-item">DATA<i class="fa-solid fa-star-of-life"></i></div><div class="ticker-item">STRATEGY<i class="fa-solid fa-star-of-life"></i></div><div class="ticker-item">MARKETING<i class="fa-solid fa-star-of-life"></i></div><div class="ticker-item">EVENT<i class="fa-solid fa-star-of-life"></i></div><div class="ticker-item">DIGITAL<i class="fa-solid fa-star-of-life"></i></div>
+            <div class="ticker-item">BRANDING<i class="fa-solid fa-star-of-life"></i></div><div class="ticker-item">ANALYTICS<i class="fa-solid fa-star-of-life"></i></div><div class="ticker-item">CREATIVE<i class="fa-solid fa-star-of-life"></i></div><div class="ticker-item">DATA<i class="fa-solid fa-star-of-life"></i></div><div class="ticker-item">STRATEGY<i class="fa-solid fa-star-of-life"></i></div><div class="ticker-item">MARKETING<i class="fa-solid fa-star-of-life"></i></div><div class="ticker-item">EVENT<i class="fa-solid fa-star-of-life"></i></div><div class="ticker-item">DIGITAL<i class="fa-solid fa-star-of-life"></i></div>
+        </div>
+    </div>
+</div>
+
+                <section id="contact" class="section">
+                    <div class="container" style="text-align: center;">
+                         <div class="section-header"><span class="tagline">Готовы к росту?</span><h2 class="section-title">Свяжитесь со мной</h2></div>
+                        <div class="hero-cta-group">
+                            <a href="mailto:anton.ryasov@outlook.com" class="button glow-on-hover-dynamic-neon"><i class="fa-solid fa-envelope"></i> Email</a>
+                            <a href="https://t.me/ryasov" target="_blank" rel="noopener" class="button glow-on-hover-dynamic-neon"><i class="fa-brands fa-telegram"></i> Telegram</a>
+                            <a href="https://wa.me/79035582231" target="_blank" rel="noopener" class="button glow-on-hover-dynamic-neon"><i class="fa-brands fa-whatsapp"></i> WhatsApp</a>
+                        </div>
+                    </div>
+                </section>
+            </main>
+
+            <footer class="footer">
+                <div class="container" style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 20px;">
+                    <div class="footer-logo">Anton Ryasov © 2025</div>
+                    <div class="footer-links"><a href="https://t.me/tms_ryasov" target="_blank" rel="noopener">Канал в Telegram</a><a href="#your-portfolio-link">Портфолио</a></div>
+                </div>
+            </footer>
+        </div>
+    </div>
+
+    <script>
+    window.addEventListener('load', () => {
+        const preloader = document.querySelector('.preloader');
+        if (window.gsap && preloader) {
+            gsap.to(preloader, { opacity: 0, duration: 0.8, ease: 'power2.inOut', onComplete: () => { preloader.style.display = 'none'; initPage(); } });
+        } else { if (preloader) preloader.style.display = 'none'; initPage(); }
+    });
+
+    function initPage() {
+        document.body.style.overflow = 'auto';
+        let lenis = null;
+        if (window.Lenis) {
+            lenis = new Lenis({ lerp: 0.1, smoothWheel: true });
+            if (window.gsap) { lenis.on('scroll', ScrollTrigger.update); gsap.ticker.add((time) => lenis.raf(time * 1000)); gsap.ticker.lagSmoothing(0); } else { function raf(time) { lenis.raf(time); requestAnimationFrame(raf); } requestAnimationFrame(raf); }
+        } else { document.documentElement.style.scrollBehavior = 'smooth'; }
+        
+        if (window.gsap && window.ScrollTrigger) {
+            gsap.registerPlugin(ScrollTrigger);
+            document.querySelectorAll('.section-header, .portal-card, .footer').forEach(el => {
+                gsap.from(el, { opacity: 0, y: 40, duration: 1, ease: 'power3.out', scrollTrigger: { trigger: el, start: 'top 90%', toggleActions: 'play none none none' } });
+            });
+        }
+        
+        const navbar = document.querySelector('.navbar');
+        if (navbar) {
+            let lastScrollY = window.scrollY;
+            const handleScroll = (currentScrollY) => {
+                if (currentScrollY > 100 && currentScrollY > lastScrollY) navbar.classList.add('hidden');
+                else navbar.classList.remove('hidden');
+                lastScrollY = currentScrollY;
+            };
+            if (lenis) { lenis.on('scroll', (e) => handleScroll(e.scroll)); } else { window.addEventListener('scroll', () => handleScroll(window.scrollY), { passive: true }); }
+        }
+        
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', e => {
+                const href = anchor.getAttribute('href');
+                if (href.length <= 1) return;
+                const target = document.querySelector(href);
+                if (!target) return;
+                e.preventDefault();
+                if (lenis) { lenis.scrollTo(target, { offset: -80, duration: 1.5 }); } else { window.scrollTo({ top: target.offsetTop - 80, behavior: 'smooth' }); }
+            });
+        });
+
+        const roles = ["Маркетолог-аналитик", "Бренд-стратег", "Креативный консультант"];
+        typewriter("hero-subtitle", roles);
+    }
+
+    function typewriter(elementId, textArray) {
+        const targetElement = document.getElementById(elementId);
+        if (!targetElement) return;
+        let textIndex = 0, charIndex = 0, isDeleting = false;
+        const type = () => {
+            const currentText = textArray[textIndex];
+            targetElement.innerHTML = `${currentText.substring(0, charIndex)}<span class="cursor"></span>`;
+            if (!isDeleting && charIndex < currentText.length) { charIndex++; setTimeout(type, 100); } 
+            else if (isDeleting && charIndex > 0) { charIndex--; setTimeout(type, 50); } 
+            else { isDeleting = !isDeleting; if (!isDeleting) { textIndex = (textIndex + 1) % textArray.length; } setTimeout(type, 1200); }
+        };
+        type();
+    }
+    </script>
+</body> 
+</html>
